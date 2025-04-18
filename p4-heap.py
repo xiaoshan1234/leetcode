@@ -21,7 +21,7 @@ def HeapBuild(arr,len):
 
 def HeapSort(arr,len):
     HeapBuild(arr,len)
-    # 交换堆顶和堆低，这样，大根堆得出从小到大，小根堆得出从大到小，先得出最后的
+    # 交换堆顶和堆底，这样，大根堆得出从小到大，小根堆得出从大到小，先得出最后的
     for i in range(0,len-1):
         tmp =  arr[0]
         arr[0] = arr[len-i-1]
