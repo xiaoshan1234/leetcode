@@ -1,36 +1,38 @@
-# 假设子树已经调节好，调节的目的是把当前树根放到合适的位置，也就是下沉
-
-def HeapAdjust(arr,start,end):
-    k = start
-    sd = arr[k]
-    i = 2*k+1
+def heap_adjust(nums, start, end):
+    if start>=end:
+        return
+    k=start
+    sd=nums[k]
+    i=2*k+1
     while i<=end:
-        if i<end and arr[i]<arr[i+1]:
+        if i<end and nums[i]<nums[i+1]:
             i+=1
-        if sd < arr[i]:
-            arr[k]=arr[i]
+        if nums[i]>sd:
+            nums[k] = nums[i]
             k=i
         else:
             break
-        i=2*i+1
-    arr[k] = sd
+        i=i*2+1
+    nums[k]=sd        
 
-def HeapBuild(arr,len):
-    for i in range((len-1)//2,-1,-1):
-        HeapAdjust(arr,i,len-1)
-
-def HeapSort(arr,len):
-    HeapBuild(arr,len)
-    # 交换堆顶和堆底，这样，大根堆得出从小到大，小根堆得出从大到小，先得出最后的
-    for i in range(0,len-1):
-        tmp =  arr[0]
-        arr[0] = arr[len-i-1]
-        arr[len-i-1] = tmp
-        HeapAdjust(arr,0,len-2-i)
-
-a = [9,4,6,0,8]
-HeapSort(a,5)
-print(a)
-
-
+def head_build(nums,length):
+    for i in range((length-2)//2,-1,-1):
+        heap_adjust(nums,i,length-1)
+        
     
+class Solution:
+    def findKthLargest(self, nums, k: int) -> int:
+        length = len(nums)
+        head_build(nums,length)
+        for i in range(0,k):
+            tail = length-1-i
+            t = nums[0]
+            nums[0] = nums[tail]
+            nums[tail] = t
+            heap_adjust(nums,0,tail-1)
+
+        return nums[length-1-(k-1)]
+    
+a= [9,4,6,0,8]
+s=Solution()
+s.findKthLargest(a,1)
