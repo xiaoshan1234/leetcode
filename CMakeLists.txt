@@ -3,4 +3,5 @@ project(leetcode VERSION 0.1.0 LANGUAGES C CXX)
 
 add_executable(p1 cpp/p1.cpp)
 add_executable(p2 cpp/p2.cpp)
+add_executable(p4 cpp/p4.cpp)
 
